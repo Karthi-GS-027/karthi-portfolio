@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Karthi G - Technical Support Engineer | System Administrator | IT Support</title>
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Professional portfolio of Karthi G - Technical Support Engineer and System Administrator with 3+ years of experience in IT infrastructure, troubleshooting, and enterprise support. Open to Malta and European relocation." />
+  <meta name="keywords" content="IT Support Engineer, System Administrator, Technical Support Engineer, Desktop Support, Windows Support, Windows Server, Microsoft 365, Active Directory, Networking, DNS, DHCP, TCP/IP, PowerShell, IT Helpdesk, Hardware Troubleshooting, System Administration, Malta IT Support, Europe IT Support" />
+  <meta name="author" content="Karthi G" />
+
+  <!-- Open Graph / Social Sharing -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Karthi G - IT Support Engineer & System Administrator" />
+  <meta property="og:description" content="Technical Support Engineer & System Administrator with 3+ years experience. Open to Malta relocation. Available with 30 days notice." />
+  <meta property="og:url" content="https://karthi-g.portfolio" />
+  <meta property="og:image" content="assets/profile.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              200: '#bfdbfe',
+              500: '#3b82f6',
+              600: '#2563eb',
+              700: '#1d4ed8',
+              800: '#1e40af',
+              900: '#1e3a8a',
+              950: '#172554',
+            },
+            slate: {
+              850: '#151e2e',
+              900: '#0f172a',
+              950: '#090d16',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'],
+            mono: ['JetBrains Mono', 'Fira Code', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0f172a;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #475569;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 min-h-screen font-sans antialiased selection:bg-blue-500 selection:text-white transition-colors duration-200">
+
+  <!-- ========================================================================= -->
+  <!-- 1. STICKY RESPONSIVE NAVIGATION                                          -->
+  <!-- ========================================================================= -->
+  <header class="sticky top-0 z-40 w-full backdrop-blur-md bg-white/90 dark:bg-slate-900/90 border-b border-slate-200 dark:border-slate-800 transition-colors">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      
+      <!-- Brand / Logo -->
+      <a href="#hero" class="flex items-center gap-3 group focus:outline-none">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-700 text-white flex items-center justify-center font-bold text-sm shadow-md shadow-blue-500/20 group-hover:scale-105 transition-transform">
+          KG
+        </div>
+        <div class="flex flex-col">
+          <span id="nav-brand-name" class="font-bold text-base sm:text-lg tracking-tight text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+            Karthi G
+          </span>
+          <span class="text-[11px] font-medium text-slate-500 dark:text-slate-400 -mt-1 hidden sm:inline">
+            IT Support &amp; SysAdmin
+          </span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <nav class="hidden lg:flex items-center gap-1 xl:gap-2 text-sm font-medium text-slate-600 dark:text-slate-300">
+        <a href="#hero" class="px-3 py-1.5 rounded-lg hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors">Home</a>
+        <a href="#about" class="px-3 py-1.5 rounded-lg hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors">About</a>
+        <a href="#skills" class="px-3 py-1.5 rounded-lg hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors">Skills</a>
+        <a href="#experience" class="px-3 py-1.5 rounded-lg hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors">Experience</a>
+        <a href="#projects" class="px-3 py-1.5 rounded-lg hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors">Projects</a>
+        <a href="#certifications" class="px-3 py-1.5 rounded-lg hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors">Certifications</a>
+        <a href="#education" class="px-3 py-1.5 rounded-lg hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors">Education</a>
+        <a href="#contact" class="px-3 py-1.5 rounded-lg hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors">Contact</a>
+      </nav>
+
+      <!-- Right Utility Actions -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <!-- Download CV Button -->
+        <a href="assets/cv.pdf" target="_blank" download class="cv-download-link hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-blue-600 hover:bg-blue-700 text-white shadow-sm shadow-blue-500/20 active:scale-95 transition-all">
+          <i data-lucide="file-down" class="w-4 h-4"></i>
+          <span>Download CV</span>
+        </a>
+
+        <!-- Dark/Light Theme Toggle -->
+        <button type="button" aria-label="Toggle Dark Mode" class="theme-toggle-btn p-2 rounded-xl text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+          <span class="theme-toggle-icon">
+            <i data-lucide="moon" class="w-5 h-5"></i>
+          </span>
+        </button>
+
+        <!-- Admin Portal Link -->
+        <a href="admin.html" aria-label="Admin Portal" class="p-2 rounded-xl text-slate-500 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" title="Admin Portal">
+          <i data-lucide="shield-check" class="w-5 h-5"></i>
+        </a>
+
+        <!-- Mobile Hamburger Menu Button -->
+        <button id="mobile-menu-btn" type="button" aria-label="Toggle Menu" class="lg:hidden p-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Dropdown Navigation -->
+    <div id="mobile-menu-dropdown" class="hidden lg:hidden border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-4 pt-3 pb-6 space-y-2 shadow-xl">
+      <a href="#hero" class="block px-3 py-2 rounded-lg text-sm font-medium hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200">Home</a>
+      <a href="#about" class="block px-3 py-2 rounded-lg text-sm font-medium hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200">About Me</a>
+      <a href="#skills" class="block px-3 py-2 rounded-lg text-sm font-medium hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200">Technical Skills</a>
+      <a href="#experience" class="block px-3 py-2 rounded-lg text-sm font-medium hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200">Professional Experience</a>
+      <a href="#projects" class="block px-3 py-2 rounded-lg text-sm font-medium hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200">Projects</a>
+      <a href="#certifications" class="block px-3 py-2 rounded-lg text-sm font-medium hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200">Certifications</a>
+      <a href="#education" class="block px-3 py-2 rounded-lg text-sm font-medium hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200">Education</a>
+      <a href="#contact" class="block px-3 py-2 rounded-lg text-sm font-medium hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200">Contact</a>
+      <div class="pt-3 border-t border-slate-100 dark:border-slate-800 flex flex-col gap-2">
+        <a href="assets/cv.pdf" target="_blank" download class="cv-download-link w-full py-2.5 rounded-xl text-center text-sm font-semibold bg-blue-600 text-white flex items-center justify-center gap-2">
+          <i data-lucide="file-down" class="w-4 h-4"></i>
+          <span>Download CV (PDF)</span>
+        </a>
+        <a href="admin.html" class="w-full py-2 rounded-xl text-center text-xs font-medium text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 flex items-center justify-center gap-2">
+          <i data-lucide="shield-check" class="w-4 h-4"></i>
+          <span>Admin Dashboard</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ========================================================================= -->
+    <!-- 2. HERO SECTION                                                           -->
+    <!-- ========================================================================= -->
+    <section id="hero" class="relative overflow-hidden pt-12 pb-20 lg:pt-20 lg:pb-28 border-b border-slate-200 dark:border-slate-800/80 bg-gradient-to-b from-blue-50/40 via-transparent to-transparent dark:from-blue-950/20 dark:via-transparent">
+      
+      <!-- Subtle IT Background Grid -->
+      <div class="absolute inset-0 -z-10 bg-[linear-gradient(to_right,#e2e8f0_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f0_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-35"></div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col-reverse lg:flex-row items-center justify-between gap-12 lg:gap-16">
+          
+          <!-- Hero Text & Credentials -->
+          <div class="flex-1 text-center lg:text-left space-y-6">
+            
+            <!-- Relocation & Availability Badges -->
+            <div class="flex flex-wrap items-center justify-center lg:justify-start gap-2.5">
+              <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-700/60 shadow-sm">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span id="hero-relocation">Open to Malta Relocation</span>
+              </span>
+
+              <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300 border border-blue-300 dark:border-blue-700/60 shadow-sm">
+                <i data-lucide="clock" class="w-3.5 h-3.5 text-blue-600 dark:text-blue-400"></i>
+                <span id="hero-availability">Available with 30 days notice</span>
+              </span>
+            </div>
+
+            <!-- Name Heading -->
+            <div>
+              <h1 id="hero-name" class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+                Karthi G
+              </h1>
+              <p id="hero-subtitle" class="text-lg sm:text-xl lg:text-2xl font-semibold text-blue-600 dark:text-blue-400 mt-2">
+                Technical Support Engineer | System Administrator | IT Support
+              </p>
+            </div>
+
+            <!-- Summary Paragraph -->
+            <p id="hero-description" class="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed max-w-2xl mx-auto lg:mx-0">
+              IT professional with 3+ years of experience in technical support, system administration, IT infrastructure, troubleshooting, and end-user support. Experienced in diagnosing and resolving hardware, software, operating system, network, and user-related issues.
+            </p>
+
+            <!-- Location Badge -->
+            <div class="flex items-center justify-center lg:justify-start gap-2 text-sm text-slate-500 dark:text-slate-400">
+              <i data-lucide="map-pin" class="w-4 h-4 text-rose-500"></i>
+              <span id="hero-location" class="font-medium">Bangalore, India</span>
+              <span class="text-slate-300 dark:text-slate-700">•</span>
+              <span class="text-xs uppercase tracking-wider font-semibold text-slate-500">Ready for European Relocation</span>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex flex-wrap items-center justify-center lg:justify-start gap-3.5 pt-2">
+              <a href="assets/cv.pdf" target="_blank" download class="cv-download-link inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold bg-blue-600 hover:bg-blue-700 text-white shadow-lg shadow-blue-500/25 active:scale-95 transition-all">
+                <i data-lucide="download" class="w-4 h-4"></i>
+                <span>Download CV</span>
+              </a>
+
+              <a href="#contact" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-100 border border-slate-300 dark:border-slate-700 shadow-sm active:scale-95 transition-all">
+                <i data-lucide="mail" class="w-4 h-4 text-blue-500"></i>
+                <span>Contact Me</span>
+              </a>
+
+              <a id="hero-linkedin-link" href="https://in.linkedin.com/in/karthi-g17" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold bg-slate-100 dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-blue-900/30 text-blue-700 dark:text-blue-300 border border-slate-200 dark:border-slate-700 active:scale-95 transition-all" title="LinkedIn Profile">
+                <i data-lucide="linkedin" class="w-4 h-4"></i>
+                <span>LinkedIn</span>
+              </a>
+
+              <a id="hero-github-link" href="#" target="_blank" rel="noopener noreferrer" class="hidden inline-flex items-center gap-2 px-4 py-3 rounded-xl text-sm font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
+                <i data-lucide="github" class="w-4 h-4"></i>
+                <span>GitHub</span>
+              </a>
+            </div>
+
+          </div>
+
+          <!-- Hero Profile Image Container -->
+          <div class="flex-shrink-0 relative group">
+            <!-- Glow background -->
+            <div class="absolute -inset-1.5 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full blur-xl opacity-30 group-hover:opacity-50 transition duration-500"></div>
+
+            <div class="relative w-52 h-52 sm:w-64 sm:h-64 lg:w-72 lg:h-72 rounded-full p-2 bg-white dark:bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shadow-2xl">
+              <img 
+                id="hero-profile-img" 
+                src="assets/profile.jpg" 
+                alt="Karthi G - IT Support Engineer" 
+                class="w-full h-full rounded-full object-cover border-4 border-blue-500/20 dark:border-blue-400/20 shadow-inner"
+                onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 240 240\'><defs><linearGradient id=\'g\' x1=\'0%\' y1=\'0%\' x2=\'100%\' y2=\'100%\'><stop offset=\'0%\' stop-color=\'%230f172a\'/><stop offset=\'100%\' stop-color=\'%231e3a8a\'/></linearGradient></defs><circle cx=\'120\' cy=\'120\' r=\'116\' fill=\'url(%23g)\' stroke=\'%233b82f6\' stroke-width=\'4\'/><text x=\'120\' y=\'135\' font-family=\'sans-serif\' font-size=\'46\' font-weight=\'bold\' fill=\'%2393c5fd\' text-anchor=\'middle\'>KG</text></svg>';"
+              />
+              
+              <!-- IT Status Badge on avatar -->
+              <div class="absolute bottom-2 right-2 sm:bottom-4 sm:right-4 bg-white dark:bg-slate-900 px-3 py-1.5 rounded-full border border-slate-200 dark:border-slate-700 shadow-md flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping"></span>
+                <span class="text-[11px] font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider">Online</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- 3. ABOUT ME SECTION                                                       -->
+    <!-- ========================================================================= -->
+    <section id="about" class="py-16 lg:py-24 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-3xl mx-auto mb-12">
+          <span class="text-xs uppercase tracking-wider font-bold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 px-3 py-1 rounded-full border border-blue-200 dark:border-blue-800">
+            Professional Profile
+          </span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mt-3">
+            About Me
+          </h2>
+          <p class="text-sm sm:text-base text-slate-500 dark:text-slate-400 mt-2">
+            Committed to high-uptime infrastructure, prompt incident resolution, and smooth user operations.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          
+          <!-- Narrative & Strengths -->
+          <div class="lg:col-span-7 space-y-6">
+            <div class="p-6 sm:p-8 rounded-2xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700/80 shadow-sm space-y-4">
+              <h3 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                <i data-lucide="user-check" class="w-5 h-5 text-blue-600 dark:text-blue-400"></i>
+                Professional Summary
+              </h3>
+              <p id="about-summary-text" class="text-slate-600 dark:text-slate-300 text-base leading-relaxed">
+                IT professional with 3+ years of experience in technical support, system administration, IT infrastructure, troubleshooting, and end-user support. Experienced in diagnosing and resolving hardware, software, operating system, network, and user-related issues. Proven ability to manage IT systems, provide technical assistance, maintain infrastructure, and support smooth day-to-day IT operations.
+              </p>
+            </div>
+
+            <!-- European / Malta Mobility Card -->
+            <div class="p-6 rounded-2xl bg-gradient-to-r from-blue-900/10 via-indigo-900/10 to-blue-900/5 dark:from-blue-950/60 dark:to-slate-900 border border-blue-200 dark:border-blue-800/60 flex items-start gap-4">
+              <div class="w-12 h-12 rounded-xl bg-blue-600 text-white flex items-center justify-center flex-shrink-0 shadow-md shadow-blue-500/20">
+                <i data-lucide="plane-takeoff" class="w-6 h-6"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-slate-900 dark:text-white text-base">Malta &amp; European Relocation Readiness</h4>
+                <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mt-1 leading-relaxed">
+                  Actively seeking technical support engineering and system administrator opportunities in <strong>Malta</strong> and across Europe. Ready to relocate with a 30-day notice period, possessing valid international documentation and adaptability to European business operations.
+                </p>
+              </div>
+            </div>
+
+            <!-- Languages -->
+            <div class="p-6 rounded-2xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700/80 shadow-sm">
+              <h4 class="text-sm font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-3 flex items-center gap-2">
+                <i data-lucide="languages" class="w-4 h-4 text-blue-500"></i>
+                Language Proficiencies
+              </h4>
+              <div id="about-languages-container" class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <!-- Populated dynamically by app.js -->
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Statistics & Domain Highlights Grid -->
+          <div class="lg:col-span-5 space-y-4">
+            <h3 class="text-base font-bold text-slate-900 dark:text-white mb-2 flex items-center gap-2">
+              <i data-lucide="activity" class="w-4 h-4 text-blue-600 dark:text-blue-400"></i>
+              Key Competency Metrics
+            </h3>
+
+            <div id="about-stats-container" class="grid grid-cols-2 gap-3.5">
+              <!-- Populated by app.js -->
+            </div>
+
+            <!-- Availability Note Box -->
+            <div class="p-5 rounded-2xl bg-white dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 text-xs sm:text-sm text-slate-600 dark:text-slate-300 space-y-2">
+              <div class="flex items-center gap-2 text-blue-600 dark:text-blue-400 font-bold">
+                <i data-lucide="check-circle-2" class="w-4 h-4"></i>
+                Notice Period &amp; Joining
+              </div>
+              <p>Available to transition within <strong>30 days</strong> notice. Open to in-person interviews and prompt deployment.</p>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- 4. TECHNICAL SKILLS SECTION                                               -->
+    <!-- ========================================================================= -->
+    <section id="skills" class="py-16 lg:py-24 border-b border-slate-200 dark:border-slate-800">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-3xl mx-auto mb-10">
+          <span class="text-xs uppercase tracking-wider font-bold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 px-3 py-1 rounded-full border border-blue-200 dark:border-blue-800">
+            Technical Stack
+          </span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mt-3">
+            Core Technical Skills
+          </h2>
+          <p class="text-sm sm:text-base text-slate-500 dark:text-slate-400 mt-2">
+            Practical, enterprise-proven skills verified across daily workstation, network, server, and end-user support.
+          </p>
+
+          <!-- Skills Filter Tabs -->
+          <div id="skills-filter-tabs" class="flex flex-wrap items-center justify-center gap-2 mt-6">
+            <!-- Rendered by app.js -->
+          </div>
+        </div>
+
+        <!-- Skills Cards Grid -->
+        <div id="skills-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Rendered dynamically by app.js -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- 5. PROFESSIONAL EXPERIENCE SECTION                                        -->
+    <!-- ========================================================================= -->
+    <section id="experience" class="py-16 lg:py-24 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-3xl mx-auto mb-14">
+          <span class="text-xs uppercase tracking-wider font-bold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 px-3 py-1 rounded-full border border-blue-200 dark:border-blue-800">
+            Work History
+          </span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mt-3">
+            Professional Experience
+          </h2>
+          <p class="text-sm sm:text-base text-slate-500 dark:text-slate-400 mt-2">
+            3+ years in continuous IT support, client site deployments (LEOS-ISRO, Syrmas GS), and infrastructure maintenance.
+          </p>
+        </div>
+
+        <div class="max-w-4xl mx-auto">
+          <div id="experience-timeline-container">
+            <!-- Rendered dynamically by app.js -->
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- 6. PROJECTS SECTION                                                       -->
+    <!-- ========================================================================= -->
+    <section id="projects" class="py-16 lg:py-24 border-b border-slate-200 dark:border-slate-800">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-3xl mx-auto mb-12">
+          <span class="text-xs uppercase tracking-wider font-bold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 px-3 py-1 rounded-full border border-blue-200 dark:border-blue-800">
+            Technical Initiatives
+          </span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mt-3">
+            Practical IT Projects
+          </h2>
+          <p class="text-sm sm:text-base text-slate-500 dark:text-slate-400 mt-2">
+            Practical automation scripts and configuration projects to improve workstation provisioning and IT operational efficiency.
+          </p>
+        </div>
+
+        <div id="projects-container" class="max-w-3xl mx-auto">
+          <!-- Rendered dynamically by app.js -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- 7. CERTIFICATIONS & EDUCATION SECTION                                     -->
+    <!-- ========================================================================= -->
+    <section id="certifications" class="py-16 lg:py-24 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          
+          <!-- Certifications Column -->
+          <div>
+            <div class="mb-8">
+              <span class="text-xs uppercase tracking-wider font-bold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 px-3 py-1 rounded-full border border-blue-200 dark:border-blue-800">
+                Credentials
+              </span>
+              <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mt-3">
+                Certifications
+              </h2>
+              <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
+                Industry-standard technical accreditations.
+              </p>
+            </div>
+
+            <div id="certifications-container" class="space-y-4">
+              <!-- Rendered dynamically by app.js -->
+            </div>
+          </div>
+
+          <!-- Education Column -->
+          <div id="education">
+            <div class="mb-8">
+              <span class="text-xs uppercase tracking-wider font-bold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 px-3 py-1 rounded-full border border-blue-200 dark:border-blue-800">
+                Academic Background
+              </span>
+              <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mt-3">
+                Education
+              </h2>
+              <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
+                Formal university degree and computer applications diploma.
+              </p>
+            </div>
+
+            <div id="education-container" class="space-y-4">
+              <!-- Rendered dynamically by app.js -->
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- 8. KEY STRENGTHS SECTION                                                  -->
+    <!-- ========================================================================= -->
+    <section id="strengths" class="py-16 lg:py-20 border-b border-slate-200 dark:border-slate-800">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-3xl mx-auto mb-12">
+          <span class="text-xs uppercase tracking-wider font-bold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 px-3 py-1 rounded-full border border-blue-200 dark:border-blue-800">
+            Core Competencies
+          </span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mt-3">
+            Key Professional Strengths
+          </h2>
+          <p class="text-sm sm:text-base text-slate-500 dark:text-slate-400 mt-2">
+            The professional mindset and core attributes brought to every IT engineering and support engagement.
+          </p>
+        </div>
+
+        <div id="strengths-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- Rendered dynamically by app.js -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- 9. CONTACT SECTION                                                        -->
+    <!-- ========================================================================= -->
+    <section id="contact" class="py-16 lg:py-24 bg-gradient-to-b from-white to-blue-50/30 dark:from-slate-900/60 dark:to-slate-950">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-3xl mx-auto mb-12">
+          <span class="text-xs uppercase tracking-wider font-bold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 px-3 py-1 rounded-full border border-blue-200 dark:border-blue-800">
+            Direct Communication
+          </span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mt-3">
+            Get in Touch
+          </h2>
+          <p class="text-sm sm:text-base text-slate-500 dark:text-slate-400 mt-2">
+            Available for technical support, IT administrator, and infrastructure roles in Malta, Europe, and globally.
+          </p>
+        </div>
+
+        <div class="max-w-4xl mx-auto">
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            
+            <!-- Email Card -->
+            <div class="p-6 rounded-2xl bg-white dark:bg-slate-800/90 border border-slate-200/80 dark:border-slate-700/80 shadow-sm flex flex-col justify-between">
+              <div>
+                <div class="w-12 h-12 rounded-xl bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 flex items-center justify-center font-bold mb-4">
+                  <i data-lucide="mail" class="w-6 h-6"></i>
+                </div>
+                <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-1">Email Address</h4>
+                <p id="contact-email-text" class="text-sm sm:text-base font-bold text-slate-900 dark:text-white break-all">karthi.contact3@gmail.com</p>
+              </div>
+              <div class="flex items-center gap-2 mt-5">
+                <a id="contact-email-btn" href="mailto:karthi.contact3@gmail.com" class="flex-1 py-2 px-3 rounded-lg text-xs font-semibold bg-blue-600 hover:bg-blue-700 text-white text-center transition-colors">
+                  Send Email
+                </a>
+                <button id="copy-email-btn" class="p-2 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:text-blue-600" title="Copy Email">
+                  <i data-lucide="copy" class="w-4 h-4"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Phone Card -->
+            <div class="p-6 rounded-2xl bg-white dark:bg-slate-800/90 border border-slate-200/80 dark:border-slate-700/80 shadow-sm flex flex-col justify-between">
+              <div>
+                <div class="w-12 h-12 rounded-xl bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold mb-4">
+                  <i data-lucide="phone-call" class="w-6 h-6"></i>
+                </div>
+                <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-1">Phone Number</h4>
+                <p id="contact-phone-text" class="text-sm sm:text-base font-bold text-slate-900 dark:text-white">+91-9361191640</p>
+              </div>
+              <div class="flex items-center gap-2 mt-5">
+                <a id="contact-phone-btn" href="tel:+91-9361191640" class="flex-1 py-2 px-3 rounded-lg text-xs font-semibold bg-emerald-600 hover:bg-emerald-700 text-white text-center transition-colors">
+                  Call Now
+                </a>
+                <button id="copy-phone-btn" class="p-2 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:text-emerald-600" title="Copy Phone">
+                  <i data-lucide="copy" class="w-4 h-4"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Location & Relocation Card -->
+            <div class="p-6 rounded-2xl bg-white dark:bg-slate-800/90 border border-slate-200/80 dark:border-slate-700/80 shadow-sm flex flex-col justify-between sm:col-span-2 lg:col-span-1">
+              <div>
+                <div class="w-12 h-12 rounded-xl bg-purple-50 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 flex items-center justify-center font-bold mb-4">
+                  <i data-lucide="map-pin" class="w-6 h-6"></i>
+                </div>
+                <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-1">Current Base</h4>
+                <p id="contact-location-text" class="text-sm sm:text-base font-bold text-slate-900 dark:text-white">Bangalore, India</p>
+                <p id="contact-relocation-note" class="text-xs text-blue-600 dark:text-blue-400 font-semibold mt-1">Open to Malta relocation</p>
+              </div>
+              <div class="mt-5">
+                <a id="contact-linkedin-btn" href="https://in.linkedin.com/in/karthi-g17" target="_blank" rel="noopener noreferrer" class="w-full py-2 px-3 rounded-lg text-xs font-semibold bg-slate-100 dark:bg-slate-700 hover:bg-blue-50 dark:hover:bg-blue-900/40 text-blue-700 dark:text-blue-300 border border-slate-200 dark:border-slate-600 flex items-center justify-center gap-1.5 transition-colors">
+                  <i data-lucide="linkedin" class="w-4 h-4"></i>
+                  <span>LinkedIn Profile</span>
+                </a>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Bottom Action Bar -->
+          <div class="p-6 rounded-2xl bg-white dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-center flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="text-left">
+              <h4 class="font-bold text-slate-900 dark:text-white text-base">Looking for my complete resume?</h4>
+              <p class="text-xs text-slate-500 dark:text-slate-400">Download the full CV in PDF format for HR and recruiter reviews.</p>
+            </div>
+            <a href="assets/cv.pdf" target="_blank" download class="cv-download-link inline-flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-semibold bg-blue-600 hover:bg-blue-700 text-white shadow-md active:scale-95 transition-all">
+              <i data-lucide="file-down" class="w-4 h-4"></i>
+              <span>Download Full CV</span>
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- ========================================================================= -->
+  <!-- 10. FOOTER                                                                -->
+  <!-- ========================================================================= -->
+  <footer class="py-12 border-t border-slate-200 dark:border-slate-800 bg-slate-100/80 dark:bg-slate-950 text-slate-500 dark:text-slate-400 text-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+        
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-lg bg-blue-600 text-white flex items-center justify-center font-bold text-xs">
+            KG
+          </div>
+          <div>
+            <p class="font-bold text-slate-800 dark:text-slate-200">Karthi G</p>
+            <p class="text-xs text-slate-500">Technical Support Engineer | System Administrator</p>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-center gap-6 text-xs font-medium">
+          <a href="#hero" class="hover:text-blue-500 transition-colors">Home</a>
+          <a href="#about" class="hover:text-blue-500 transition-colors">About</a>
+          <a href="#skills" class="hover:text-blue-500 transition-colors">Skills</a>
+          <a href="#experience" class="hover:text-blue-500 transition-colors">Experience</a>
+          <a href="#projects" class="hover:text-blue-500 transition-colors">Projects</a>
+          <a href="#contact" class="hover:text-blue-500 transition-colors">Contact</a>
+          <a href="admin.html" class="inline-flex items-center gap-1 text-blue-600 dark:text-blue-400 hover:underline">
+            <i data-lucide="lock" class="w-3 h-3"></i>
+            <span>Admin</span>
+          </a>
+        </div>
+
+        <div class="text-center md:text-right text-xs">
+          <p>&copy; 2026 Karthi G. All rights reserved.</p>
+          <p class="text-slate-400 dark:text-slate-600 mt-0.5">Static portfolio hosted at ₹0 cost on free cloud tier.</p>
+        </div>
+
+      </div>
+    </div>
+  </footer>
+
+  <!-- Application Logic -->
+  <script src="./app.js"></script>
+</body>
+</html>

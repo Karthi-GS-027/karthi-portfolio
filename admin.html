@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard - Karthi G Portfolio Management</title>
+  
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              200: '#bfdbfe',
+              500: '#3b82f6',
+              600: '#2563eb',
+              700: '#1d4ed8',
+              800: '#1e40af',
+              900: '#1e3a8a',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-slate-100 text-slate-900 dark:bg-slate-950 dark:text-slate-100 min-h-screen font-sans antialiased transition-colors duration-200">
+
+  <!-- ========================================================================= -->
+  <!-- 1. ADMIN LOGIN VIEW (Gated before auth)                                    -->
+  <!-- ========================================================================= -->
+  <div id="admin-login-section" class="min-h-screen flex items-center justify-center p-4">
+    <div class="w-full max-w-md bg-white dark:bg-slate-900 rounded-3xl p-8 border border-slate-200 dark:border-slate-800 shadow-2xl">
+      
+      <div class="text-center mb-8">
+        <div class="w-14 h-14 rounded-2xl bg-blue-600 text-white mx-auto flex items-center justify-center font-bold shadow-lg shadow-blue-500/25 mb-4">
+          <i data-lucide="shield-check" class="w-7 h-7"></i>
+        </div>
+        <h1 class="text-2xl font-extrabold text-slate-900 dark:text-white">Portfolio Admin Portal</h1>
+        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Sign in to manage personal portfolio content</p>
+      </div>
+
+      <!-- Error Message Container -->
+      <div id="login-error-msg" class="hidden mb-6 p-3.5 rounded-xl bg-red-50 dark:bg-red-950/60 border border-red-200 dark:border-red-800 text-red-600 dark:text-red-300 text-xs font-medium"></div>
+
+      <!-- Login Form -->
+      <form id="admin-login-form" class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-1.5">Username</label>
+          <input type="text" id="login-username" value="admin" required class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="admin" />
+        </div>
+
+        <div>
+          <div class="flex items-center justify-between mb-1.5">
+            <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400">Password</label>
+            <button type="button" id="toggle-password-visibility" class="text-xs text-blue-600 dark:text-blue-400 hover:underline">Show</button>
+          </div>
+          <input type="password" id="login-password" value="password123" required class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="••••••••" />
+        </div>
+
+        <button type="submit" class="w-full py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm shadow-lg shadow-blue-500/25 active:scale-95 transition-all">
+          Sign In to Dashboard
+        </button>
+      </form>
+
+      <!-- Demo Info & Security Notice -->
+      <div class="mt-8 pt-6 border-t border-slate-100 dark:border-slate-800 text-center space-y-3">
+        <p class="text-xs text-slate-500 dark:text-slate-400">
+          Default Credentials: <strong class="text-slate-700 dark:text-slate-300">admin</strong> / <strong class="text-slate-700 dark:text-slate-300">password123</strong>
+        </p>
+        
+        <div class="p-3 rounded-xl bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800/50 text-[11px] text-amber-800 dark:text-amber-300 text-left">
+          <strong>Static Website Architecture:</strong> This administration portal operates via browser localStorage for ₹0 hosting cost. It is intended for personal portfolio updates, not enterprise secret storage.
+        </div>
+
+        <div>
+          <a href="index.html" class="inline-flex items-center gap-1.5 text-xs text-blue-600 dark:text-blue-400 hover:underline">
+            <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+            <span>Back to Public Portfolio</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- 2. ADMIN DASHBOARD VIEW (Shown after auth)                                 -->
+  <!-- ========================================================================= -->
+  <div id="admin-dashboard-section" class="hidden min-h-screen flex flex-col">
+    
+    <!-- Top Bar Header -->
+    <header class="h-16 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-4 sm:px-8 flex items-center justify-between sticky top-0 z-30">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold text-sm">
+          KG
+        </div>
+        <div>
+          <h2 class="font-bold text-sm sm:text-base text-slate-900 dark:text-white">Karthi G • Portfolio Admin</h2>
+          <p class="text-[11px] text-slate-500">Logged in as <span id="admin-header-username" class="font-semibold text-blue-500">admin</span></p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2 sm:gap-3">
+        <a href="index.html" target="_blank" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+          <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+          <span>View Public Site</span>
+        </a>
+
+        <!-- Theme Toggle -->
+        <button type="button" aria-label="Toggle Theme" class="theme-toggle-btn p-2 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">
+          <span class="theme-toggle-icon">
+            <i data-lucide="moon" class="w-4 h-4"></i>
+          </span>
+        </button>
+
+        <!-- Logout Button -->
+        <button id="admin-logout-btn" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-red-50 text-red-600 hover:bg-red-100 dark:bg-red-950/40 dark:text-red-400 dark:hover:bg-red-900/50 transition-colors">
+          <i data-lucide="log-out" class="w-3.5 h-3.5"></i>
+          <span>Logout</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Workspace with Sidebar -->
+    <div class="flex-1 flex flex-col md:flex-row">
+      
+      <!-- Responsive Sidebar Navigation -->
+      <aside class="w-full md:w-64 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 p-4 flex-shrink-0">
+        <p class="text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-3 px-3">Management Sections</p>
+        <nav class="space-y-1 text-sm font-medium">
+          <a href="#" data-target="panel-overview" class="admin-nav-tab flex items-center gap-3 px-3 py-2 rounded-xl bg-blue-600 text-white font-semibold transition-colors">
+            <i data-lucide="layout-dashboard" class="w-4 h-4"></i> Overview
+          </a>
+          <a href="#" data-target="panel-profile" class="admin-nav-tab flex items-center gap-3 px-3 py-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+            <i data-lucide="user" class="w-4 h-4"></i> Profile Details
+          </a>
+          <a href="#" data-target="panel-hero" class="admin-nav-tab flex items-center gap-3 px-3 py-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+            <i data-lucide="sparkles" class="w-4 h-4"></i> Hero Section
+          </a>
+          <a href="#" data-target="panel-about" class="admin-nav-tab flex items-center gap-3 px-3 py-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+            <i data-lucide="file-text" class="w-4 h-4"></i> About Me
+          </a>
+          <a href="#" data-target="panel-skills" class="admin-nav-tab flex items-center gap-3 px-3 py-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+            <i data-lucide="cpu" class="w-4 h-4"></i> Technical Skills
+          </a>
+          <a href="#" data-target="panel-experience" class="admin-nav-tab flex items-center gap-3 px-3 py-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+            <i data-lucide="briefcase" class="w-4 h-4"></i> Experience
+          </a>
+          <a href="#" data-target="panel-projects" class="admin-nav-tab flex items-center gap-3 px-3 py-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+            <i data-lucide="terminal" class="w-4 h-4"></i> Projects
+          </a>
+          <a href="#" data-target="panel-certifications" class="admin-nav-tab flex items-center gap-3 px-3 py-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+            <i data-lucide="award" class="w-4 h-4"></i> Certifications
+          </a>
+          <a href="#" data-target="panel-education" class="admin-nav-tab flex items-center gap-3 px-3 py-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+            <i data-lucide="graduation-cap" class="w-4 h-4"></i> Education
+          </a>
+          <a href="#" data-target="panel-photo" class="admin-nav-tab flex items-center gap-3 px-3 py-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+            <i data-lucide="image" class="w-4 h-4"></i> Profile Photo
+          </a>
+          <a href="#" data-target="panel-cv" class="admin-nav-tab flex items-center gap-3 px-3 py-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+            <i data-lucide="file-down" class="w-4 h-4"></i> CV Management
+          </a>
+          <a href="#" data-target="panel-contact" class="admin-nav-tab flex items-center gap-3 px-3 py-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+            <i data-lucide="mail" class="w-4 h-4"></i> Contact Info
+          </a>
+          <a href="#" data-target="panel-settings" class="admin-nav-tab flex items-center gap-3 px-3 py-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+            <i data-lucide="settings" class="w-4 h-4"></i> Settings &amp; Backup
+          </a>
+        </nav>
+      </aside>
+
+      <!-- Panels Container -->
+      <main class="flex-1 p-4 sm:p-8 max-w-5xl overflow-y-auto">
+
+        <!-- ===================================================================== -->
+        <!-- PANEL 1: OVERVIEW                                                     -->
+        <!-- ===================================================================== -->
+        <section id="panel-overview" class="admin-panel-content space-y-6">
+          <div>
+            <h2 class="text-2xl font-bold text-slate-900 dark:text-white">Dashboard Overview</h2>
+            <p class="text-sm text-slate-500">Summary of current portfolio components and quick actions.</p>
+          </div>
+
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+              <span class="text-xs uppercase font-bold text-slate-400">Active Skills</span>
+              <p id="stat-skills-count" class="text-3xl font-extrabold text-blue-600 dark:text-blue-400 mt-1">0</p>
+            </div>
+            <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+              <span class="text-xs uppercase font-bold text-slate-400">Experience Roles</span>
+              <p id="stat-exp-count" class="text-3xl font-extrabold text-indigo-600 dark:text-indigo-400 mt-1">0</p>
+            </div>
+            <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+              <span class="text-xs uppercase font-bold text-slate-400">IT Projects</span>
+              <p id="stat-proj-count" class="text-3xl font-extrabold text-emerald-600 dark:text-emerald-400 mt-1">0</p>
+            </div>
+            <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+              <span class="text-xs uppercase font-bold text-slate-400">Certifications</span>
+              <p id="stat-cert-count" class="text-3xl font-extrabold text-purple-600 dark:text-purple-400 mt-1">0</p>
+            </div>
+          </div>
+
+          <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-4">
+            <h3 class="font-bold text-base text-slate-900 dark:text-white">Quick Administration Links</h3>
+            <div class="flex flex-wrap gap-3">
+              <a href="index.html" target="_blank" class="px-4 py-2 rounded-xl bg-blue-600 text-white text-xs font-semibold hover:bg-blue-700 inline-flex items-center gap-2">
+                <i data-lucide="external-link" class="w-4 h-4"></i> Preview Live Website
+              </a>
+              <button onclick="document.querySelector('[data-target=\'panel-photo\']').click()" class="px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-xs font-semibold hover:bg-slate-200 dark:hover:bg-slate-700 inline-flex items-center gap-2">
+                <i data-lucide="camera" class="w-4 h-4"></i> Update Profile Photo
+              </button>
+              <button onclick="document.querySelector('[data-target=\'panel-settings\']').click()" class="px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-xs font-semibold hover:bg-slate-200 dark:hover:bg-slate-700 inline-flex items-center gap-2">
+                <i data-lucide="download" class="w-4 h-4"></i> Export Backup JSON
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================================================================== -->
+        <!-- PANEL 2: PROFILE DETAILS                                              -->
+        <!-- ===================================================================== -->
+        <section id="panel-profile" class="admin-panel-content hidden space-y-6">
+          <div>
+            <h2 class="text-2xl font-bold text-slate-900 dark:text-white">Profile Details</h2>
+            <p class="text-sm text-slate-500">Global candidate details used throughout headers and metadata.</p>
+          </div>
+
+          <form id="admin-profile-form" class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Full Name</label>
+                <input type="text" id="p-name" class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm" required />
+              </div>
+              <div>
+                <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Professional Title</label>
+                <input type="text" id="p-title" class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm" required />
+              </div>
+              <div>
+                <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Base Location</label>
+                <input type="text" id="p-location" class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Relocation Status</label>
+                <input type="text" id="p-relocation" class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Availability / Notice Period</label>
+                <input type="text" id="p-availability" class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Contact Email</label>
+                <input type="email" id="p-email" class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm" required />
+              </div>
+              <div>
+                <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Contact Phone</label>
+                <input type="text" id="p-phone" class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold uppercase text-slate-500 mb-1">LinkedIn URL</label>
+                <input type="url" id="p-linkedin" class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm" />
+              </div>
+              <div class="sm:col-span-2">
+                <label class="block text-xs font-bold uppercase text-slate-500 mb-1">GitHub URL (Optional, hide button if empty)</label>
+                <input type="url" id="p-github" class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm" placeholder="Leave empty if not applicable" />
+              </div>
+            </div>
+
+            <div class="pt-4 flex justify-end">
+              <button type="submit" class="px-6 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm shadow-md">
+                Save Profile Changes
+              </button>
+            </div>
+          </form>
+        </section>
+
+        <!-- ===================================================================== -->
+        <!-- PANEL 3: HERO SECTION                                                 -->
+        <!-- ===================================================================== -->
+        <section id="panel-hero" class="admin-panel-content hidden space-y-6">
+          <div>
+            <h2 class="text-2xl font-bold text-slate-900 dark:text-white">Hero Section</h2>
+            <p class="text-sm text-slate-500">Configure main landing heading, subtitle, badges, and pitch.</p>
+          </div>
+
+          <form id="admin-hero-form" class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-4">
+            <div>
+              <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Hero Main Heading (Name)</label>
+              <input type="text" id="h-title" class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm" required />
+            </div>
+            <div>
+              <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Professional Subtitle</label>
+              <input type="text" id="h-subtitle" class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm" required />
+            </div>
+            <div>
+              <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Hero Pitch / Short Description</label>
+              <textarea id="h-description" rows="3" class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm leading-relaxed"></textarea>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div>
+                <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Location Text</label>
+                <input type="text" id="h-location" class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Relocation Badge Text</label>
+                <input type="text" id="h-relocation" class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Availability Badge Text</label>
+                <input type="text" id="h-availability" class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm" />
+              </div>
+            </div>
+
+            <div class="pt-4 flex justify-end">
+              <button type="submit" class="px-6 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm shadow-md">
+                Update Hero Section
+              </button>
+            </div>
+          </form>
+        </section>
+
+        <!-- ===================================================================== -->
+        <!-- PANEL 4: ABOUT ME                                                     -->
+        <!-- ===================================================================== -->
+        <section id="panel-about" class="admin-panel-content hidden space-y-6">
+          <div>
+            <h2 class="text-2xl font-bold text-slate-900 dark:text-white">About Me</h2>
+            <p class="text-sm text-slate-500">Edit the detailed professional summary.</p>
+          </div>
+
+          <form id="admin-about-form" class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-4">
+            <div>
+              <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Professional Summary</label>
+              <textarea id="a-summary" rows="6" class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm leading-relaxed" required></textarea>
+            </div>
+            <div class="pt-4 flex justify-end">
+              <button type="submit" class="px-6 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm shadow-md">
+                Save Summary
+              </button>
+            </div>
+          </form>
+        </section>
+
+        <!-- ===================================================================== -->
+        <!-- PANEL 5: TECHNICAL SKILLS                                             -->
+        <!-- ===================================================================== -->
+        <section id="panel-skills" class="admin-panel-content hidden space-y-6">
+          <div class="flex items-center justify-between">
+            <div>
+              <h2 class="text-2xl font-bold text-slate-900 dark:text-white">Technical Skills</h2>
+              <p class="text-sm text-slate-500">Add, enable, disable, or remove technical skills by category.</p>
+            </div>
+          </div>
+
+          <!-- Add Skill Form -->
+          <form id="admin-add-skill-form" class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row gap-3 items-end">
+            <div class="flex-1 w-full">
+              <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Skill Name</label>
+              <input type="text" id="new-skill-name" placeholder="e.g. PowerShell" class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm" required />
+            </div>
+            <div class="w-full sm:w-64">
+              <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Category</label>
+              <select id="new-skill-category" class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm">
+                <option value="Operating Systems">Operating Systems</option>
+                <option value="IT Support">IT Support</option>
+                <option value="Microsoft Applications">Microsoft Applications</option>
+                <option value="Hardware">Hardware</option>
+                <option value="Networking">Networking</option>
+                <option value="System Administration">System Administration</option>
+                <option value="Cloud">Cloud</option>
+                <option value="IT Infrastructure">IT Infrastructure</option>
+                <option value="Troubleshooting">Troubleshooting</option>
+                <option value="Tools">Tools</option>
+              </select>
+            </div>
+            <button type="submit" class="w-full sm:w-auto px-5 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm shadow-md whitespace-nowrap">
+              Add Skill
+            </button>
+          </form>
+
+          <!-- Skills List -->
+          <div id="admin-skills-list" class="space-y-2">
+            <!-- Rendered by app.js -->
+          </div>
+        </section>
+
+        <!-- ===================================================================== -->
+        <!-- PANEL 6: EXPERIENCE                                                   -->
+        <!-- ===================================================================== -->
+        <section id="panel-experience" class="admin-panel-content hidden space-y-6">
+          <div>
+            <h2 class="text-2xl font-bold text-slate-900 dark:text-white">Professional Experience</h2>
+            <p class="text-sm text-slate-500">Manage work history, company deployments, and key responsibilities.</p>
+          </div>
+
+          <!-- Add Experience Form -->
+          <form id="admin-add-exp-form" class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-4">
+            <h3 class="font-bold text-sm text-slate-800 dark:text-slate-200">Add Work Experience</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Job Title / Role</label>
+                <input type="text" id="exp-role" class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm" required />
+              </div>
+              <div>
+                <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Company</label>
+                <input type="text" id="exp-company" class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm" required />
+              </div>
+              <div>
+                <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Deployment / Client (e.g. LEOS-ISRO)</label>
+                <input type="text" id="exp-deployment" class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Period (e.g. Mar 2026 – Present)</label>
+                <input type="text" id="exp-period" class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm" required />
+              </div>
+              <div>
+                <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Location</label>
+                <input type="text" id="exp-location" value="Bangalore, India" class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm" />
+              </div>
+              <div class="flex items-center gap-2 pt-6">
+                <input type="checkbox" id="exp-current" class="w-4 h-4 rounded text-blue-600 focus:ring-blue-500" />
+                <label for="exp-current" class="text-sm font-medium text-slate-700 dark:text-slate-300">Current Role</label>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Responsibilities (One bullet per line)</label>
+              <textarea id="exp-responsibilities" rows="4" class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm leading-relaxed" placeholder="Enter each duty on a separate line"></textarea>
+            </div>
+
+            <div class="flex justify-end">
+              <button type="submit" class="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm shadow-md">
+                Add Experience Entry
+              </button>
+            </div>
+          </form>
+
+          <!-- List of Experience -->
+          <div id="admin-experience-list" class="space-y-4">
+            <!-- Populated by app.js -->
+          </div>
+        </section>
+
+        <!-- ===================================================================== -->
+        <!-- PANEL 7: PROJECTS                                                     -->
+        <!-- ===================================================================== -->
+        <section id="panel-projects" class="admin-panel-content hidden space-y-6">
+          <div>
+            <h2 class="text-2xl font-bold text-slate-900 dark:text-white">IT Projects</h2>
+            <p class="text-sm text-slate-500">Document honest personal/technical scripts, tools, and automation initiatives.</p>
+          </div>
+
+          <!-- Add Project Form -->
+          <form id="admin-add-proj-form" class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-4">
+            <h3 class="font-bold text-sm text-slate-800 dark:text-slate-200">Add Technical Project</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div class="sm:col-span-2">
+                <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Project Name</label>
+                <input type="text" id="proj-name" class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm" required />
+              </div>
+              <div class="sm:col-span-2">
+                <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Description</label>
+                <textarea id="proj-desc" rows="2" class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm" required></textarea>
+              </div>
+              <div>
+                <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Problem / Challenge</label>
+                <textarea id="proj-problem" rows="2" class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm"></textarea>
+              </div>
+              <div>
+                <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Solution</label>
+                <textarea id="proj-solution" rows="2" class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm"></textarea>
+              </div>
+              <div>
+                <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Result &amp; Impact</label>
+                <textarea id="proj-result" rows="2" class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm"></textarea>
+              </div>
+              <div>
+                <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Technologies (Comma separated)</label>
+                <input type="text" id="proj-tech" placeholder="PowerShell, Windows, Automation" class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold uppercase text-slate-500 mb-1">GitHub URL (Hidden if empty)</label>
+                <input type="url" id="proj-github" class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Live/Demo URL (Hidden if empty)</label>
+                <input type="url" id="proj-url" class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm" />
+              </div>
+            </div>
+
+            <div class="flex justify-end">
+              <button type="submit" class="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm shadow-md">
+                Add Project
+              </button>
+            </div>
+          </form>
+
+          <!-- Projects List -->
+          <div id="admin-projects-list" class="space-y-4">
+            <!-- Populated by app.js -->
+          </div>
+        </section>
+
+        <!-- ===================================================================== -->
+        <!-- PANEL 8: CERTIFICATIONS                                               -->
+        <!-- ===================================================================== -->
+        <section id="panel-certifications" class="admin-panel-content hidden space-y-6">
+          <div>
+            <h2 class="text-2xl font-bold text-slate-900 dark:text-white">Certifications</h2>
+            <p class="text-sm text-slate-500">Manage verified IT certifications and credentials.</p>
+          </div>
+
+          <form id="admin-add-cert-form" class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-4">
+            <h3 class="font-bold text-sm text-slate-800 dark:text-slate-200">Add Certification</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Certification Name</label>
+                <input type="text" id="cert-name" placeholder="Technical Support Fundamentals" class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm" required />
+              </div>
+              <div>
+                <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Issuing Organization</label>
+                <input type="text" id="cert-org" placeholder="Google" class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm" required />
+              </div>
+              <div>
+                <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Date Completed</label>
+                <input type="text" id="cert-date" placeholder="March 2026" class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Credential ID (Optional)</label>
+                <input type="text" id="cert-id" class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm" />
+              </div>
+              <div class="sm:col-span-2">
+                <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Credential URL (Hidden if empty)</label>
+                <input type="url" id="cert-url" class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm" />
+              </div>
+            </div>
+            <div class="flex justify-end">
+              <button type="submit" class="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm shadow-md">
+                Add Certification
+              </button>
+            </div>
+          </form>
+
+          <div id="admin-certs-list" class="space-y-3">
+            <!-- Populated by app.js -->
+          </div>
+        </section>
+
+        <!-- ===================================================================== -->
+        <!-- PANEL 9: EDUCATION                                                    -->
+        <!-- ===================================================================== -->
+        <section id="panel-education" class="admin-panel-content hidden space-y-6">
+          <div>
+            <h2 class="text-2xl font-bold text-slate-900 dark:text-white">Education</h2>
+            <p class="text-sm text-slate-500">Degree and computer applications diploma background.</p>
+          </div>
+
+          <form id="admin-add-edu-form" class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-4">
+            <h3 class="font-bold text-sm text-slate-800 dark:text-slate-200">Add Academic Entry</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div class="sm:col-span-2">
+                <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Degree / Course</label>
+                <input type="text" id="edu-degree" placeholder="B.Sc Chemistry" class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm" required />
+              </div>
+              <div>
+                <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Graduation Year</label>
+                <input type="text" id="edu-year" placeholder="2020" class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm" required />
+              </div>
+              <div class="sm:col-span-3">
+                <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Institution / University</label>
+                <input type="text" id="edu-inst" placeholder="Bharathidasan University, Trichy" class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm" required />
+              </div>
+              <div class="sm:col-span-3">
+                <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Description (Optional)</label>
+                <textarea id="edu-desc" rows="2" class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm"></textarea>
+              </div>
+            </div>
+            <div class="flex justify-end">
+              <button type="submit" class="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm shadow-md">
+                Add Education Entry
+              </button>
+            </div>
+          </form>
+
+          <div id="admin-edu-list" class="space-y-3">
+            <!-- Populated by app.js -->
+          </div>
+        </section>
+
+        <!-- ===================================================================== -->
+        <!-- PANEL 10: PROFILE PHOTO MANAGEMENT                                    -->
+        <!-- ===================================================================== -->
+        <section id="panel-photo" class="admin-panel-content hidden space-y-6">
+          <div>
+            <h2 class="text-2xl font-bold text-slate-900 dark:text-white">Profile Photo Management</h2>
+            <p class="text-sm text-slate-500">Preview, select, and save your real photo to browser localStorage or fallback to file.</p>
+          </div>
+
+          <div class="p-6 sm:p-8 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-6">
+            
+            <div id="admin-photo-error" class="hidden p-3.5 rounded-xl bg-red-50 dark:bg-red-950/60 border border-red-200 dark:border-red-800 text-red-600 dark:text-red-300 text-xs font-medium"></div>
+
+            <div class="flex flex-col sm:flex-row items-center gap-8">
+              
+              <!-- Circular Live Preview -->
+              <div class="relative w-44 h-44 rounded-full p-2 bg-slate-50 dark:bg-slate-800 ring-2 ring-blue-500/30 shadow-xl flex-shrink-0">
+                <img 
+                  id="admin-photo-preview" 
+                  src="assets/profile.jpg" 
+                  alt="Karthi G Preview" 
+                  class="w-full h-full rounded-full object-cover shadow-inner"
+                  onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 240 240\'><defs><linearGradient id=\'g\' x1=\'0%\' y1=\'0%\' x2=\'100%\' y2=\'100%\'><stop offset=\'0%\' stop-color=\'%230f172a\'/><stop offset=\'100%\' stop-color=\'%231e3a8a\'/></linearGradient></defs><circle cx=\'120\' cy=\'120\' r=\'116\' fill=\'url(%23g)\' stroke=\'%233b82f6\' stroke-width=\'4\'/><text x=\'120\' y=\'135\' font-family=\'sans-serif\' font-size=\'46\' font-weight=\'bold\' fill=\'%2393c5fd\' text-anchor=\'middle\'>KG</text></svg>';"
+                />
+              </div>
+
+              <!-- Controls -->
+              <div class="flex-1 space-y-4 text-center sm:text-left">
+                <div>
+                  <h4 class="font-bold text-slate-900 dark:text-white text-base">Select Image from Computer</h4>
+                  <p class="text-xs text-slate-500 mt-1">Accepted: JPG, JPEG, PNG, WEBP. Maximum recommended file size: 5 MB.</p>
+                </div>
+
+                <div>
+                  <input type="file" id="admin-photo-file" accept="image/jpeg,image/png,image/webp,image/jpg" class="block w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 dark:file:bg-slate-800 dark:file:text-slate-300 cursor-pointer" />
+                </div>
+
+                <div class="flex flex-wrap items-center gap-3 pt-2 justify-center sm:justify-start">
+                  <button id="admin-save-photo-btn" class="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs shadow-md inline-flex items-center gap-2">
+                    <i data-lucide="check" class="w-4 h-4"></i> Save Profile Photo
+                  </button>
+                  <button id="admin-reset-photo-btn" class="px-4 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 text-xs font-semibold inline-flex items-center gap-2">
+                    <i data-lucide="rotate-ccw" class="w-4 h-4"></i> Reset to Default (assets/profile.jpg)
+                  </button>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Helpful Notes -->
+            <div class="p-4 rounded-xl bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-900/50 text-xs text-blue-900 dark:text-blue-300 space-y-1">
+              <strong class="font-semibold block">How Profile Photo Persistence Works:</strong>
+              <p>1. When you select an image and click <strong>Save Profile Photo</strong>, it is encoded as Base64 in your browser's localStorage. It will remain visible across page refreshes.</p>
+              <p>2. If you click <strong>Reset Profile Photo</strong>, the system reverts to loading <code>assets/profile.jpg</code>.</p>
+              <p>3. If <code>assets/profile.jpg</code> does not exist on disk, a professional SVG placeholder avatar is displayed automatically without breaking the website.</p>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ===================================================================== -->
+        <!-- PANEL 11: CV MANAGEMENT                                               -->
+        <!-- ===================================================================== -->
+        <section id="panel-cv" class="admin-panel-content hidden space-y-6">
+          <div>
+            <h2 class="text-2xl font-bold text-slate-900 dark:text-white">CV / Resume Settings</h2>
+            <p class="text-sm text-slate-500">Configure CV path, external PDF URL, and enable/disable download buttons.</p>
+          </div>
+
+          <form id="admin-cv-form" class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-4">
+            <div>
+              <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Local CV File Path (Default: assets/cv.pdf)</label>
+              <input type="text" id="cv-path" class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm font-mono" />
+            </div>
+            <div>
+              <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Or External CV URL (Google Drive / Cloud storage link)</label>
+              <input type="url" id="cv-url" placeholder="https://drive.google.com/..." class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm" />
+            </div>
+            <div class="flex items-center gap-3 pt-2">
+              <input type="checkbox" id="cv-enable-check" class="w-4 h-4 rounded text-blue-600 focus:ring-blue-500" />
+              <label for="cv-enable-check" class="text-sm font-medium text-slate-700 dark:text-slate-300">Enable "Download CV" buttons across portfolio</label>
+            </div>
+
+            <div class="pt-4 flex justify-end">
+              <button type="submit" class="px-6 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm shadow-md">
+                Save CV Settings
+              </button>
+            </div>
+          </form>
+        </section>
+
+        <!-- ===================================================================== -->
+        <!-- PANEL 12: CONTACT INFO                                                -->
+        <!-- ===================================================================== -->
+        <section id="panel-contact" class="admin-panel-content hidden space-y-6">
+          <div>
+            <h2 class="text-2xl font-bold text-slate-900 dark:text-white">Contact Information</h2>
+            <p class="text-sm text-slate-500">Contact card details displayed at the bottom of the public portfolio.</p>
+          </div>
+
+          <form id="admin-contact-form" class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Email</label>
+                <input type="email" id="c-email" class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm" required />
+              </div>
+              <div>
+                <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Phone</label>
+                <input type="text" id="c-phone" class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm" required />
+              </div>
+              <div>
+                <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Location</label>
+                <input type="text" id="c-location" class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold uppercase text-slate-500 mb-1">LinkedIn URL</label>
+                <input type="url" id="c-linkedin" class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm" />
+              </div>
+              <div class="sm:col-span-2">
+                <label class="block text-xs font-bold uppercase text-slate-500 mb-1">GitHub URL (Hidden if empty)</label>
+                <input type="url" id="c-github" class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm" />
+              </div>
+            </div>
+
+            <div class="pt-4 flex justify-end">
+              <button type="submit" class="px-6 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm shadow-md">
+                Save Contact Info
+              </button>
+            </div>
+          </form>
+        </section>
+
+        <!-- ===================================================================== -->
+        <!-- PANEL 13: SETTINGS & BACKUP                                           -->
+        <!-- ===================================================================== -->
+        <section id="panel-settings" class="admin-panel-content hidden space-y-6">
+          <div>
+            <h2 class="text-2xl font-bold text-slate-900 dark:text-white">Settings, Credentials &amp; Backup</h2>
+            <p class="text-sm text-slate-500">Change login credentials, export JSON backups, import configurations, or reset defaults.</p>
+          </div>
+
+          <!-- Credentials Card -->
+          <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-4">
+            <h3 class="font-bold text-base text-slate-900 dark:text-white">Change Admin Credentials</h3>
+            <form id="admin-credentials-form" class="space-y-4 max-w-lg">
+              <div>
+                <label class="block text-xs font-bold uppercase text-slate-500 mb-1">New Username</label>
+                <input type="text" id="set-username" class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm" required />
+              </div>
+              <div>
+                <label class="block text-xs font-bold uppercase text-slate-500 mb-1">New Password (Leave blank to keep current)</label>
+                <input type="password" id="set-password" placeholder="••••••••" class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm" />
+              </div>
+              <button type="submit" class="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs shadow-md">
+                Update Login Credentials
+              </button>
+            </form>
+          </div>
+
+          <!-- Data Backup: Export & Import -->
+          <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-4">
+            <h3 class="font-bold text-base text-slate-900 dark:text-white">Portfolio Data Backup &amp; Migration</h3>
+            <p class="text-xs text-slate-500 leading-relaxed">
+              Export your entire portfolio state (profile, skills, work history, projects, certifications, photo) into a single standard JSON file. You can restore it on any computer or browser at any time.
+            </p>
+
+            <div class="flex flex-wrap items-center gap-4 pt-2">
+              <button id="admin-export-btn" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs shadow-md inline-flex items-center gap-2">
+                <i data-lucide="download" class="w-4 h-4"></i> Export Portfolio Data (JSON)
+              </button>
+
+              <label class="px-5 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 font-semibold text-xs cursor-pointer inline-flex items-center gap-2 border border-slate-300 dark:border-slate-700">
+                <i data-lucide="upload" class="w-4 h-4"></i> Import Portfolio Data (JSON)
+                <input type="file" id="admin-import-file" accept=".json" class="hidden" />
+              </label>
+            </div>
+          </div>
+
+          <!-- Danger Zone: Reset & Clear -->
+          <div class="p-6 rounded-2xl bg-red-50/50 dark:bg-red-950/20 border border-red-200 dark:border-red-900/60 space-y-4">
+            <h3 class="font-bold text-base text-red-600 dark:text-red-400">Danger Zone</h3>
+            <p class="text-xs text-slate-600 dark:text-slate-400">
+              Restore the portfolio to the verified initial baseline for Karthi G, or clear all browser localStorage.
+            </p>
+
+            <div class="flex flex-wrap items-center gap-3">
+              <button id="admin-reset-all-btn" class="px-4 py-2 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-semibold text-xs shadow-sm inline-flex items-center gap-2">
+                <i data-lucide="rotate-ccw" class="w-4 h-4"></i> Reset to Default Baseline
+              </button>
+
+              <button id="admin-clear-storage-btn" class="px-4 py-2 rounded-xl bg-red-600 hover:bg-red-700 text-white font-semibold text-xs shadow-sm inline-flex items-center gap-2">
+                <i data-lucide="trash-2" class="w-4 h-4"></i> Clear All LocalStorage
+              </button>
+            </div>
+          </div>
+
+          <!-- Security Limitation Disclosure -->
+          <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 text-xs text-slate-600 dark:text-slate-400 space-y-2">
+            <h4 class="font-bold text-slate-800 dark:text-slate-200">Security Architecture Disclosure:</h4>
+            <p>
+              This website is a 100% static, client-side application engineered to cost <strong>₹0 to host</strong> on free hosting tiers (Netlify, Vercel, GitHub Pages). Authentication is enforced locally via the browser's <code>localStorage</code> API.
+            </p>
+            <p>
+              While this is ideal for managing your personal portfolio without paying for database servers, <strong>it is not a replacement for server-side enterprise security</strong>. Do not store sensitive secrets, financial keys, or production credentials in this static system.
+            </p>
+          </div>
+        </section>
+
+      </main>
+
+    </div>
+
+  </div>
+
+  <!-- Application Logic -->
+  <script src="./app.js"></script>
+</body>
+</html>
