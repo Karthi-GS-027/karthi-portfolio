@@ -602,7 +602,7 @@
         <section id="panel-photo" class="admin-panel-content hidden space-y-6">
           <div>
             <h2 class="text-2xl font-bold text-slate-900 dark:text-white">Profile Photo Management</h2>
-            <p class="text-sm text-slate-500">Preview, select, and save your real photo to browser localStorage or fallback to file.</p>
+            <p class="text-sm text-slate-500">Preview the permanent public profile photo asset (assets/profile.jpg).</p>
           </div>
 
           <div class="p-6 sm:p-8 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-6">
@@ -615,17 +615,16 @@
               <div class="relative w-44 h-44 rounded-full p-2 bg-slate-50 dark:bg-slate-800 ring-2 ring-blue-500/30 shadow-xl flex-shrink-0">
                 <img 
                   id="admin-photo-preview" 
-                  src="assets/profile.jpg" 
+                  src="./assets/profile.jpg" 
                   alt="Karthi G Preview" 
                   class="w-full h-full rounded-full object-cover shadow-inner"
-                  onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 240 240\'><defs><linearGradient id=\'g\' x1=\'0%\' y1=\'0%\' x2=\'100%\' y2=\'100%\'><stop offset=\'0%\' stop-color=\'%230f172a\'/><stop offset=\'100%\' stop-color=\'%231e3a8a\'/></linearGradient></defs><circle cx=\'120\' cy=\'120\' r=\'116\' fill=\'url(%23g)\' stroke=\'%233b82f6\' stroke-width=\'4\'/><text x=\'120\' y=\'135\' font-family=\'sans-serif\' font-size=\'46\' font-weight=\'bold\' fill=\'%2393c5fd\' text-anchor=\'middle\'>KG</text></svg>';"
                 />
               </div>
 
               <!-- Controls -->
               <div class="flex-1 space-y-4 text-center sm:text-left">
                 <div>
-                  <h4 class="font-bold text-slate-900 dark:text-white text-base">Select Image from Computer</h4>
+                  <h4 class="font-bold text-slate-900 dark:text-white text-base">Test Local Image Preview</h4>
                   <p class="text-xs text-slate-500 mt-1">Accepted: JPG, JPEG, PNG, WEBP. Maximum recommended file size: 5 MB.</p>
                 </div>
 
@@ -635,22 +634,27 @@
 
                 <div class="flex flex-wrap items-center gap-3 pt-2 justify-center sm:justify-start">
                   <button id="admin-save-photo-btn" class="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs shadow-md inline-flex items-center gap-2">
-                    <i data-lucide="check" class="w-4 h-4"></i> Save Profile Photo
+                    <i data-lucide="info" class="w-4 h-4"></i> How to Update Public Photo
                   </button>
                   <button id="admin-reset-photo-btn" class="px-4 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 text-xs font-semibold inline-flex items-center gap-2">
-                    <i data-lucide="rotate-ccw" class="w-4 h-4"></i> Reset to Default (assets/profile.jpg)
+                    <i data-lucide="rotate-ccw" class="w-4 h-4"></i> Reset Preview to assets/profile.jpg
                   </button>
                 </div>
               </div>
 
             </div>
 
-            <!-- Helpful Notes -->
-            <div class="p-4 rounded-xl bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-900/50 text-xs text-blue-900 dark:text-blue-300 space-y-1">
-              <strong class="font-semibold block">How Profile Photo Persistence Works:</strong>
-              <p>1. When you select an image and click <strong>Save Profile Photo</strong>, it is encoded as Base64 in your browser's localStorage. It will remain visible across page refreshes.</p>
-              <p>2. If you click <strong>Reset Profile Photo</strong>, the system reverts to loading <code>assets/profile.jpg</code>.</p>
-              <p>3. If <code>assets/profile.jpg</code> does not exist on disk, a professional SVG placeholder avatar is displayed automatically without breaking the website.</p>
+            <!-- Helpful Permanent Asset Instructions -->
+            <div class="p-4 rounded-xl bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-900/50 text-xs text-blue-900 dark:text-blue-300 space-y-2">
+              <strong class="font-semibold block text-sm flex items-center gap-1.5">
+                <i data-lucide="shield-check" class="w-4 h-4 text-blue-600"></i> Permanent Public Profile Photo
+              </strong>
+              <p class="font-medium text-slate-800 dark:text-slate-200">
+                To change the public profile photo, replace <code>assets/profile.jpg</code> and redeploy the website.
+              </p>
+              <p class="text-slate-600 dark:text-slate-400">
+                Because this is a static website, saving images in browser localStorage only affects your local browser. Replacing <code>assets/profile.jpg</code> guarantees that every visitor, mobile device, and recruiter sees your real photo permanently across all browsers.
+              </p>
             </div>
 
           </div>
@@ -667,7 +671,7 @@
 
           <form id="admin-cv-form" class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-4">
             <div>
-              <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Local CV File Path (Default: assets/cv.pdf)</label>
+              <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Local CV File Path (Default: assets/karthi17092026.pdf)</label>
               <input type="text" id="cv-path" class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm font-mono" />
             </div>
             <div>

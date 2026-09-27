@@ -94,32 +94,26 @@ The portfolio features a dedicated administration dashboard at:
 
 ## 5. Profile Photo Management
 
-You have two simple ways to set your profile picture:
+The portfolio uses `assets/profile.jpg` as the permanent public profile photo across all visitors, devices, and browsers.
 
-### Method 1: File Replacement (Zero Browser Storage)
-Place your actual photo directly into the assets folder:
-```text
-assets/profile.jpg
-```
-The website will automatically load it.
+> **To change the public profile photo, replace assets/profile.jpg and redeploy the website.**
 
-### Method 2: In-Browser Upload (Admin Dashboard)
-1. Go to `admin.html` and log in.
-2. Click **Profile Photo** in the sidebar.
-3. Click **Choose File** and select your photo (JPG, PNG, JPEG, or WEBP under 5 MB).
-4. View the live circular preview.
-5. Click **Save Profile Photo**.
-6. The image is converted into Base64 format and stored in `localStorage`. It persists across page refreshes.
-7. To revert to `assets/profile.jpg`, simply click **Reset to Default**.
+1. Place your real photo into:
+   ```text
+   assets/profile.jpg
+   ```
+2. (Also kept in sync at `public/assets/profile.jpg` for Vite production distribution).
+3. Redeploy your static website to Netlify, Vercel, or GitHub Pages.
+4. Because the public portfolio (`index.html`) directly references `./assets/profile.jpg`, all visitors, mobile devices, and recruiters will immediately see your authentic photo.
 
-> **Missing Photo Fallback**: If `assets/profile.jpg` does not exist and no custom photo has been uploaded, a clean SVG placeholder avatar with the initials `KG` and an IT Support badge will render automatically. The website will never show a broken image icon.
+> **Missing Photo Fallback**: If `assets/profile.jpg` is missing, a professional SVG placeholder avatar with the initials `KG` and an IT Support badge will render automatically. The website will never show a broken image icon.
 
 ---
 
 ## 6. CV / Resume Management
 
-* Default file: `assets/cv.pdf`
-* Clicking any **"Download CV"** button on the public website triggers an automatic download/view of `assets/cv.pdf`.
+* Default file: `assets/karthi17092026.pdf`
+* Clicking any **"Download CV"** button on the public website triggers an automatic download/view of `assets/karthi17092026.pdf`.
 * If you store your CV on Google Drive or an external cloud host, open `admin.html` -> **CV Management**, enter your URL, and click **Save**.
 
 ---

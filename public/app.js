@@ -232,11 +232,11 @@ const DEFAULT_PORTFOLIO_DATA = {
     github: ""
   },
   cv: {
-    path: "assets/cv.pdf",
+    path: "assets/karthi17092026.pdf",
     url: "",
     enabled: true
   },
-  profilePhoto: "", // Base64 if uploaded via admin, otherwise falls back to assets/profile.jpg
+  profilePhoto: "", // Permanent asset: assets/profile.jpg
   settings: {
     adminUsername: "admin",
     adminPassword: "password123",
@@ -318,11 +318,9 @@ function getSvgAvatarPlaceholder() {
   return "data:image/svg+xml;utf8," + encodeURIComponent(svg);
 }
 
-function getEffectiveProfilePhoto(data) {
-  if (data && data.profilePhoto && typeof data.profilePhoto === 'string' && data.profilePhoto.trim() !== '') {
-    return data.profilePhoto;
-  }
-  return "assets/profile.jpg";
+// Permanent Public Profile Photo: Always loads ./assets/profile.jpg
+function getEffectiveProfilePhoto() {
+  return "./assets/profile.jpg";
 }
 
 function getCvUrl(data) {
@@ -330,7 +328,7 @@ function getCvUrl(data) {
     if (data.cv.url && data.cv.url.trim() !== "") return data.cv.url;
     if (data.cv.path && data.cv.path.trim() !== "") return data.cv.path;
   }
-  return "assets/cv.pdf";
+  return "assets/karthi17092026.pdf";
 }
 
 // ============================================================================
@@ -465,14 +463,11 @@ function renderPublicPortfolio() {
   const heroAvailability = document.getElementById("hero-availability");
   if (heroAvailability) heroAvailability.textContent = data.hero.availability || data.profile.availability;
 
-  // Profile Image
+  // Profile Image - Always load permanent public asset
   const heroImg = document.getElementById("hero-profile-img");
   if (heroImg) {
-    heroImg.src = getEffectiveProfilePhoto(data);
-    heroImg.onerror = function() {
-      this.onerror = null;
-      this.src = getSvgAvatarPlaceholder();
-    };
+    heroImg.src = "./assets/profile.jpg";
+    heroImg.onerror = null;
   }
 
   // Hero LinkedIn
@@ -1578,6 +1573,7 @@ window.deleteEdu = function(id) {
 };
 
 // 10. Profile Photo Panel
+// Permanent Public Profile Photo: To change the public profile photo, replace assets/profile.jpg and redeploy the website.
 function loadAdminProfilePhoto(data) {
   const previewImg = document.getElementById("admin-photo-preview");
   const fileInput = document.getElementById("admin-photo-file");
@@ -1588,11 +1584,9 @@ function loadAdminProfilePhoto(data) {
   let pendingBase64 = null;
 
   if (previewImg) {
-    previewImg.src = getEffectiveProfilePhoto(data);
-    previewImg.onerror = function() {
-      this.onerror = null;
-      this.src = getSvgAvatarPlaceholder();
-    };
+    // Always show the current assets/profile.jpg permanent asset
+    previewImg.src = "./assets/profile.jpg";
+    previewImg.onerror = null;
   }
 
   if (fileInput) {
@@ -1630,35 +1624,19 @@ function loadAdminProfilePhoto(data) {
 
   if (saveBtn) {
     saveBtn.onclick = () => {
-      if (!pendingBase64) {
-        showToast("Please choose a new photo to save, or use reset.", "info");
-        return;
-      }
-      const cur = getPortfolioData();
-      cur.profilePhoto = pendingBase64;
-      const success = savePortfolioData(cur);
-      if (success) {
-        showToast("Profile photo updated and saved to localStorage!", "success");
-      }
+      showToast("To change the public profile photo for all visitors, replace assets/profile.jpg and redeploy the website.", "info");
     };
   }
 
   if (resetBtn) {
     resetBtn.onclick = () => {
-      if (!confirm("Reset custom photo to default (assets/profile.jpg)?")) return;
-      const cur = getPortfolioData();
-      cur.profilePhoto = "";
-      savePortfolioData(cur);
       pendingBase64 = null;
       if (fileInput) fileInput.value = "";
       if (previewImg) {
-        previewImg.src = "assets/profile.jpg";
-        previewImg.onerror = function() {
-          this.onerror = null;
-          this.src = getSvgAvatarPlaceholder();
-        };
+        previewImg.src = "./assets/profile.jpg";
+        previewImg.onerror = null;
       }
-      showToast("Reset to default profile photo path.", "info");
+      showToast("Displaying assets/profile.jpg", "info");
     };
   }
 }
