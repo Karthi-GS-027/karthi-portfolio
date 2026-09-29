@@ -232,7 +232,7 @@ const DEFAULT_PORTFOLIO_DATA = {
     github: ""
   },
   cv: {
-    path: "assets/karthi17092026.pdf",
+    path: "assets/KARTHI G-16092026.docx",
     url: "",
     enabled: true
   },
@@ -328,7 +328,7 @@ function getCvUrl(data) {
     if (data.cv.url && data.cv.url.trim() !== "") return data.cv.url;
     if (data.cv.path && data.cv.path.trim() !== "") return data.cv.path;
   }
-  return "assets/karthi17092026.pdf";
+  return "assets/KARTHI G-16092026.docx";
 }
 
 // ============================================================================
